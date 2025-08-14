@@ -1,0 +1,16 @@
+.mantine-Tabs-tab:focus,
+.mantine-Tabs-tab:focus-visible {
+  outline: none ;
+  box-shadow: none ;
+}
+
+.no-ring-tab:focus,
+.no-ring-tab:focus-visible,
+.no-ring-tab:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.mantine-Tabs-tab[data-value="add"] {
+  color: blue;
+}
