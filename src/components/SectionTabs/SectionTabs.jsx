@@ -1,27 +1,32 @@
 import { Button, Tabs } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import "./ProductGallery.module.css";
+import "./SectionTabs.module.css";
 import { useState, useEffect } from "react";
 import supabase from "../../services/supabase-client";
 import { ProductCard } from "../Product/ProductCard";
+import { ProductGallery } from "./ProductGallery";
 
-export function ProductGallery() {
+export function SectionTabs() {
   const [section, setSection] = useState();
 
-//   useEffect(() => {
-//     fetchSection();
-//     console.log("Section data fetched:", section);
-//   }, []);
+  // useEffect(() => {
+  //   const fetchSection = async () => {
+  //     const { data, error } = await supabase.from("sections").select("*");
+  //     if (error) {
+  //       console.error("Error fetching sections:", error);
+  //     } else {
+  //       setSection(data);
+  //     }
+  //   };
 
-//   const fetchSection = async () => {
-//     const { data, error } = await supabase.from('sections').select('*');
-//     if (error) {
-//       console.error("Error fetching sections:", error);
-//     } else {
-//       setSection(data);
-//     }
-//   }
+  //   fetchSection();
+  //   console.log("Section Data Fetched");
+  // }, []);
 
+  // const sectionTabs = section.map((section) => (
+  //   <Tabs.Tab value={section.name}>{section.name}</Tabs.Tab>
+  // ));
+  console.log(section);
   return (
     <Tabs
       classNames={{ tab: "no-ring-tab" }}
@@ -33,6 +38,7 @@ export function ProductGallery() {
         <Tabs.Tab value="gallery">Gallery</Tabs.Tab>
         <Tabs.Tab value="messages">Messages</Tabs.Tab>
         <Tabs.Tab value="settings">Settings</Tabs.Tab>
+        {/* {section} */}
         <Button
           value="add"
           variant="light"
@@ -45,7 +51,8 @@ export function ProductGallery() {
       </Tabs.List>
 
       <Tabs.Panel value="gallery">
-        <ProductCard />
+        <ProductGallery />
+        <ProductGallery />
       </Tabs.Panel>
 
       <Tabs.Panel value="messages">Messages tab content</Tabs.Panel>

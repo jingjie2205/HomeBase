@@ -21,30 +21,30 @@ export function ProductCard() {
   const { image, title, country } = mockdata;
 
   return (
-      <Card withBorder radius="md" p="md" className={classes.card}>
-        <Card.Section>
-          <Image src={image} alt={title} height={180} />
-        </Card.Section>
+    <Card withBorder radius="md" p="md" className={classes.card}>
+      <Card.Section>
+        <Image src={image} alt={title} height={180} />
+      </Card.Section>
 
-        <Card.Section className={classes.section} mt="md">
-          <Group justify="apart">
-            <Text fz="lg" fw={500}>
-              {title}
-            </Text>
-            <Badge size="sm" variant="light">
-              {country}
-            </Badge>
-          </Group>
-        </Card.Section>
-
-        <Group mt="xs">
-          <Button radius="md" style={{ flex: 1 }}>
-            Show details
-          </Button>
-          <ActionIcon variant="default" radius="md" size={36}>
-            <IconHeart className={classes.like} stroke={1.5} />
-          </ActionIcon>
+      <Card.Section className={classes.section} mt="md">
+        <Group justify="apart">
+          <Text fz="lg" fw={500}>
+            {title}
+          </Text>
+          <Badge size="sm" variant="light">
+            {country}
+          </Badge>
         </Group>
-      </Card>
+      </Card.Section>
+
+      <Group mt="xs">
+        <Button radius="md" style={{ flex: 1 }}>
+          Show details
+        </Button>
+        <ActionIcon variant="default" radius="md" size={36}>
+          <IconHeart className={classes.like} stroke={1.5} />
+        </ActionIcon>
+      </Group>
+    </Card>
   );
 }

@@ -14,15 +14,11 @@ import {
   Button,
 } from "@mantine/core";
 import { UserButton } from "../UserButton/UserButton";
-import classes from "./NavBar.module.css";
+import classes from "./Navbar.module.css";
 
-const links = [
-  { icon: IconBuildingWarehouse, label: "Home"},
-];
+const links = [{ icon: IconBuildingWarehouse, label: "Home" }];
 
-const collections = [
-  { emoji: "👍", label: "Sales" },
-];
+const collections = [{ emoji: "👍", label: "Sales" }];
 
 export function NavBar() {
   const mainLinks = links.map((link) => (
