@@ -9,9 +9,9 @@ import App from "./App.jsx";
 const router = createBrowserRouter([{ path: "/", element: <Home /> }]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
-  </StrictMode>
+  // <StrictMode>
+  <MantineProvider>
+    <RouterProvider router={router} />
+  </MantineProvider>
+  // </StrictMode>
 );

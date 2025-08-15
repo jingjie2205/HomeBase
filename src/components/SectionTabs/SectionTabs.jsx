@@ -1,32 +1,29 @@
-import { Button, Tabs } from "@mantine/core";
+import { Button, Tabs, Modal } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import "./SectionTabs.module.css";
 import { useState, useEffect } from "react";
+import { useDisclosure } from "@mantine/hooks";
 import supabase from "../../services/supabase-client";
 import { ProductCard } from "../Product/ProductCard";
 import { ProductGallery } from "./ProductGallery";
+import { SectionModal } from "./SectionModal";
 
 export function SectionTabs() {
   const [section, setSection] = useState();
+  const [opened, { close, open }] = useDisclosure(false);
 
-  // useEffect(() => {
-  //   const fetchSection = async () => {
-  //     const { data, error } = await supabase.from("sections").select("*");
-  //     if (error) {
-  //       console.error("Error fetching sections:", error);
-  //     } else {
-  //       setSection(data);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchSection = async () => {
+      const { data, error } = await supabase.from("sections").select("*");
+      if (error) {
+        console.error("Error fetching sections:", error);
+      } else {
+        setSection(data);
+      }
+    };
+    fetchSection();
+  }, []);
 
-  //   fetchSection();
-  //   console.log("Section Data Fetched");
-  // }, []);
-
-  // const sectionTabs = section.map((section) => (
-  //   <Tabs.Tab value={section.name}>{section.name}</Tabs.Tab>
-  // ));
-  console.log(section);
   return (
     <Tabs
       classNames={{ tab: "no-ring-tab" }}
@@ -35,16 +32,20 @@ export function SectionTabs() {
       defaultValue="gallery"
     >
       <Tabs.List>
-        <Tabs.Tab value="gallery">Gallery</Tabs.Tab>
-        <Tabs.Tab value="messages">Messages</Tabs.Tab>
-        <Tabs.Tab value="settings">Settings</Tabs.Tab>
-        {/* {section} */}
+        {/* Dynamically create section after api call */}
+        {section?.map((section) => (
+          <Tabs.Tab key={section.name} value={section.name}>
+            {section.name}
+          </Tabs.Tab>
+        ))}
+        <SectionModal opened={opened} close={close} />
         <Button
           value="add"
           variant="light"
           color="blue"
           radius="md"
           style={{ padding: "10px" }}
+          onClick={open}
         >
           <IconPlus size={16} stroke={1.5} />
         </Button>
