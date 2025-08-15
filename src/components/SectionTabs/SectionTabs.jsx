@@ -12,9 +12,27 @@ export function SectionTabs() {
   const [section, setSection] = useState();
   const [opened, { close, open }] = useDisclosure(false);
 
+  const addSection = async (name) => {
+    const newSectionData = {
+      name: name,
+    };
+    const { data, error } = await supabase
+      .from("sections")
+      .insert([newSectionData])
+      .single();
+
+    if (error) {
+      console.log("Error adding Sections: ", error);
+    } else {
+      setSection((prev) => [...prev, data]);
+    }
+  };
+
   useEffect(() => {
     const fetchSection = async () => {
-      const { data, error } = await supabase.from("sections").select("*");
+      const { data, error } = await supabase
+        .from("sections")
+        .select("name, id");
       if (error) {
         console.error("Error fetching sections:", error);
       } else {
@@ -33,12 +51,13 @@ export function SectionTabs() {
     >
       <Tabs.List>
         {/* Dynamically create section after api call */}
-        {section?.map((section) => (
-          <Tabs.Tab key={section.name} value={section.name}>
-            {section.name}
-          </Tabs.Tab>
-        ))}
-        <SectionModal opened={opened} close={close} />
+        {section &&
+          section.map((s) => (
+            <Tabs.Tab key={s.name} value={s.name}>
+              {s.name}
+            </Tabs.Tab>
+          ))}
+        <SectionModal opened={opened} close={close} postSection={addSection} />
         <Button
           value="add"
           variant="light"

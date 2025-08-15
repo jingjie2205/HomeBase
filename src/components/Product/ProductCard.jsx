@@ -1,50 +1,68 @@
-import { IconHeart } from "@tabler/icons-react";
+import { IconFlagExclamation, IconHeart } from "@tabler/icons-react";
 import {
-  ActionIcon,
+  Flex,
   Badge,
   Button,
   Card,
   Group,
+  Stack,
   Image,
   Text,
+  Rating,
+  Box,
 } from "@mantine/core";
 import classes from "./ProductCard.module.css";
 
 const mockdata = {
   image:
     "https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
-  title: "Verudela Beach",
-  country: "Croatia",
+  link: "https://www.google.com/",
+  name: "XXTAB",
+  price: 25.99,
+  description: "smth",
+  quantity: 2,
+  rating: 4,
 };
 
 export function ProductCard() {
-  const { image, title, country } = mockdata;
+  const { image, link, name, price, description, quantity, rating } = mockdata;
 
   return (
     <Card withBorder radius="md" p="md" className={classes.card}>
       <Card.Section>
-        <Image src={image} alt={title} height={180} />
+        <Image src={image} alt={name} height={180} />
       </Card.Section>
 
       <Card.Section className={classes.section} mt="md">
-        <Group justify="apart">
+        <Stack gap="md" align="center" justify="center">
           <Text fz="lg" fw={500}>
-            {title}
+            {name}
+          </Text>
+          <Text fz="lg" fw={350}>
+            {description}
           </Text>
           <Badge size="sm" variant="light">
-            {country}
+            {price}
           </Badge>
-        </Group>
+          <Rating defaultValue={1} value={rating} />
+          <Group>
+            <Flex justify="center" align="center" gap="xl">
+              <Button> – </Button>
+              <Text>{quantity}</Text>
+              <Button> + </Button>
+            </Flex>
+          </Group>
+        </Stack>
       </Card.Section>
 
-      <Group mt="xs">
+      {/* <Group mt="xs">
         <Button radius="md" style={{ flex: 1 }}>
           Show details
         </Button>
         <ActionIcon variant="default" radius="md" size={36}>
           <IconHeart className={classes.like} stroke={1.5} />
         </ActionIcon>
-      </Group>
+      </Group> */}
     </Card>
   );
 }
