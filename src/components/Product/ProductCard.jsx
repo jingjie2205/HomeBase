@@ -9,9 +9,12 @@ import {
   Image,
   Text,
   Rating,
-  Box,
+  NumberFormatter,
+  HoverCard,
+  CloseButton,
 } from "@mantine/core";
 import classes from "./ProductCard.module.css";
+import { ProductCopyBtn } from "./CopyButton";
 
 const mockdata = {
   image:
@@ -19,13 +22,12 @@ const mockdata = {
   link: "https://www.google.com/",
   name: "XXTAB",
   price: 25.99,
-  description: "smth",
   quantity: 2,
   rating: 4,
 };
 
 export function ProductCard() {
-  const { image, link, name, price, description, quantity, rating } = mockdata;
+  const { image, link, name, price, quantity, rating } = mockdata;
 
   return (
     <Card withBorder radius="md" p="md" className={classes.card}>
@@ -35,14 +37,21 @@ export function ProductCard() {
 
       <Card.Section className={classes.section} mt="md">
         <Stack gap="md" align="center" justify="center">
-          <Text fz="lg" fw={500}>
-            {name}
-          </Text>
-          <Text fz="lg" fw={350}>
-            {description}
-          </Text>
-          <Badge size="sm" variant="light">
-            {price}
+          <HoverCard width="fit" shadow="md">
+            <HoverCard.Target>
+              <Text fz="lg" fw={500}>
+                {name}
+              </Text>
+            </HoverCard.Target>
+            <HoverCard.Dropdown>
+              <Group justify="center">
+                <CloseButton />
+                <ProductCopyBtn link={link} />
+              </Group>
+            </HoverCard.Dropdown>
+          </HoverCard>
+          <Badge size="xl" variant="light">
+            <NumberFormatter prefix="$ " value={price} thousandSeparator />
           </Badge>
           <Rating defaultValue={1} value={rating} />
           <Group>
@@ -54,15 +63,6 @@ export function ProductCard() {
           </Group>
         </Stack>
       </Card.Section>
-
-      {/* <Group mt="xs">
-        <Button radius="md" style={{ flex: 1 }}>
-          Show details
-        </Button>
-        <ActionIcon variant="default" radius="md" size={36}>
-          <IconHeart className={classes.like} stroke={1.5} />
-        </ActionIcon>
-      </Group> */}
     </Card>
   );
 }
